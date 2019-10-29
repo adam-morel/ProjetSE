@@ -1,0 +1,19 @@
+states of the physical system ~ solutions de combinations
+cost of a solution: energy of a sate.
+
+
+
+try to move to a better solution
+we want to move toward a solitoni that id better? 
+
+local/global maxima. trying to find a local close to the global ( or the global but we cant know)
+
+how to jump to a worst solution to search for a better one?
+check if neighbours is better => accept
+else => 2 things
+- how much worse ? => small change => easy to accept
+- how high are we ? => at high temperature, the system will more likely accept worse answers ( https://youtu.be/jR9RtOBHAAo?t=246 )
+
+random initial solution ( but not THAT random)
+run the loop ( n iterations)
+
