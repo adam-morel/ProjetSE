@@ -49,6 +49,7 @@ public class GA
          for (int i = 0; i < this.np; i++)
          {
             Data d = new Data(this.n);
+            //System.out.println(d.toString());
             this.p.add(d);
             this.fitness.add(this.f.value(d));
          }
@@ -175,11 +176,12 @@ public class GA
    public static void main(String[] args) throws NoSuchMethodException
    {
       Objective f = new Objective(0);
-      GA ga = new GA(5,50,1000,0.2,f);
+      GA ga = new GA(64,4,1000,0.2,f);
       System.out.println(ga);
       System.out.println("Number of iterations: " + ga.optimize());
       System.out.println("Solution: " + ga.getBestElement());
       System.out.println("and its fitness: " + f.value(ga.getBestElement()));
+
    }
 }
 

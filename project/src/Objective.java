@@ -105,5 +105,90 @@ public class Objective
       print = print + ")";
       return print;
    }
+
+   /**
+    * Computes the energy of the image. energy is produced if a pixel is in contact with a pixel of a different color
+    * @param image input image
+    * @return energy of the image
+    */
+   static int energyImage(int[][] image){
+      int energy =0;
+      for (int i=0;i<image.length;i++){
+         for (int j=0;j<image.length;j++){
+            if(i-1 >0){
+               if(image[i][j] != image[i-1][j]){ energy++;}
+               if(j-1 >0){
+                  if(image[i][j] != image[i-1][j-1]){ energy++;}
+               }
+               if (j + 1 < image.length) {
+                  if (image[i][j] != image[i - 1][j + 1]) {
+                     energy++;
+                  }
+               }
+            }
+            if(i+1 < image.length) {
+               if (j + 1 < image.length) {
+                  if (image[i][j] != image[i + 1][j + 1]) {
+                     energy++;
+                  }
+               }
+
+               if (image[i][j] != image[i + 1][j]) {
+                  energy++;
+               }
+               if (j - 1 > 0) {
+                  if (image[i][j] != image[i + 1][j - 1]) {
+                     energy++;
+                  }
+               }
+            }
+           if (j + 1 < image.length) {
+               if (image[i][j] != image[i][j + 1]) {
+                  energy++;
+               }
+            }
+            if(j-1 >0) {
+               if (image[i][j] != image[i][j - 1]) {
+                  energy++;
+               }
+            }
+
+
+            }
+         }
+
+      return energy;
+   }
+
+
+   /*public static int energyImage2(int[][] image){
+      int energy =0;
+      for (int i=0;i<image.length;i++){
+         for (int j=0;j<image.length;j++){
+
+            for (int x=0;x<image.length;x++){
+               for (int y=0;y<image.length;y++) {
+                     if ((x==i && (y==j-1 || y==j+1))
+                             || ((x==i-1 || x==i+1) && (y==i-1 ||y==i||y==i+1))){
+                        if(image[x][y] != image[i][j]){
+                           //System.out.printf("lel");
+                           energy++;
+                        }
+
+                     }
+                     else{
+                        if(image[x][y] == image[i][j]){
+                           energy++;
+                        }
+                     }
+               }
+               }
+
+
+         }
+      }
+
+      return energy;
+   }*/
 }
 
