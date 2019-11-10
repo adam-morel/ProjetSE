@@ -21,9 +21,10 @@ static boolean acceptWorse=true;
         //Parameters
 
         crystalMode=false; //Abandon All Hope ? TODO fix dat.
+        acceptWorse=true;
         int nbThreads=4; //Obviously must be inferior to arraylength. must be a square number
-        int nbColors = 20;
-        int arrayLength = 64;
+        int nbColors = 3;
+        int arrayLength = 400; // result of the process is more obvious with a small array ( such as 20)
         int temperature = 100000;
         double coolingRate = 0.00001;
         int[][] input = Data.randomArray(arrayLength, nbColors);
@@ -53,8 +54,6 @@ static boolean acceptWorse=true;
 
         double timeOneThread= System.currentTimeMillis();
         new SimulatedAnnealing(input, f, temperature, coolingRate);
-      /*  Main.acceptWorse=false; // empirical proof that sometimes accepting a worse result might be a better solution
-        new SimulatedAnnealing(clone, f, temperature, coolingRate);*/
 
 
         timeOneThread=System.currentTimeMillis()-timeOneThread;

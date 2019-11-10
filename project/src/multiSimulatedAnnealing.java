@@ -34,18 +34,8 @@ public class multiSimulatedAnnealing extends Thread {
     public void run() {
         try {
             int candidateValue;
-           /* if (!Main.crystalMode) {
-                candidateValue = Objective.initEnergy(color);
-            }else {
-                candidateValue = Objective.energyImage2(color);
-            }*/
-            //   int iteration = 0;
             while (T > 1) {
 
-              /*  int[][] colorCandidate = new int[color.length][color.length];
-                for (int x = 0; x < color.length; x++) {
-                    System.arraycopy(color[x], 0, colorCandidate[x], 0, color.length);
-                }*/
                 neighbours = SimulatedAnnealing.randomAdjacentPixelPair(color);
                 int candidate1x = neighbours[0];
                 int candidate1y = neighbours[1];
@@ -86,15 +76,5 @@ public class multiSimulatedAnnealing extends Thread {
             e.printStackTrace();
         }
     }
-/*
-        public double getValue(){
-            return currentValue;
-        }
-        public int[][] getNewState(){
-        return color;
-    }
-        public boolean getChange(){
-            return change;
-        }*/
 }
 

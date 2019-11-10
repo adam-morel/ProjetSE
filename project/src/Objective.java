@@ -116,7 +116,7 @@ public class Objective {
     }
 
     /**
-     * check the energy for a given pixel ( 4 direct sides)
+     * check the energy for a given pixel ( 8 sides around)
      *
      * @param image input image
      * @param i     pixel.x
