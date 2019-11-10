@@ -27,10 +27,10 @@ static boolean acceptWorse=true;
 
         acceptWorse=true;
         int nbThreads=4; //Obviously must be inferior to arraylength. must be a square number
-        int nbColors = 4; //Diversity of the colores
+        int nbColors = 6; //Diversity of the colores
         int arrayLength = 300; //length of the image square. total pixels = arraylength² over 500 takes a while
         int temperature = 100000;
-        double coolingRate = 0.000001; //do not put it too low , makes the result better but much slower to computee.
+        double coolingRate = 0.00001; //do not put it too low , makes the result better but much slower to computee.
         int[][] input = Data.randomArray(arrayLength, nbColors);
         int[][] clone0= new int[input.length][input.length];
         for(int x=0;x<input.length;x++)
