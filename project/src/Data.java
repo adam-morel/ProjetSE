@@ -283,7 +283,7 @@ public class Data {
      /*   System.out.println("Work size: " + size*sqrt);
         System.out.println("Input size: " + entry.length);*/
         for (int i = 0; i < numberOfZone; i++) {
-            int[][] na = new int[size][size];
+            int[][] na = new int[size][size];//TODO Here is the first problem for array size multiple of threads. if fix be careful to fix other double For that are not using image[0].length but image.length
             for (int x = 0; x < size; x++) {
                 System.arraycopy(entry[x + size * (i % sqrt)], size * (i / sqrt), na[x], 0, size);
             }
