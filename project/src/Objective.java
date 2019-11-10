@@ -199,6 +199,7 @@ public class Objective {
         int energy = 0;
         for (int i = 0; i < image.length; i++) {
             for (int j = 0; j < image.length; j++) {
+                /*
 
                 for (int x = 0; x < image.length; x++) {
                     for (int y = 0; y < image.length; y++) {
@@ -216,6 +217,15 @@ public class Objective {
                     }
                 }
 
+*/
+                int range = 20;
+                for (int x = 0; x < image.length; x++)
+                    for (int y = 0; y < image.length; y++) {
+                        if (image[i][j] != image[x][y] || !(Math.abs(x-i) < range && Math.abs(y-j) <range)) {
+                            energy++;
+
+                        }
+                    }
 
             }
         }
