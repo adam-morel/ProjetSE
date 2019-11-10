@@ -7,6 +7,7 @@ public class Main {
 static double energyMulti=0;
 static double energySeq=0;
 static boolean crystalMode=false;
+static int crystalRange=4;
 static boolean acceptWorse=true;
 
     /**
@@ -20,13 +21,16 @@ static boolean acceptWorse=true;
 
         //Parameters
 
-        crystalMode=false; //Abandon All Hope ? TODO fix dat.
+        crystalMode=false; //Abandon All Hope --
+        /* While being MUCH longer, the end result is better,
+         if activated, the energy ratio Crystal/normal should be around 35%  */
+
         acceptWorse=true;
         int nbThreads=4; //Obviously must be inferior to arraylength. must be a square number
-        int nbColors = 3;
-        int arrayLength = 200; // result of the process is more obvious with a small array ( such as 20)
+        int nbColors = 4; //Diversity of the colores
+        int arrayLength = 300; //length of the image square. total pixels = arraylength² over 500 takes a while
         int temperature = 100000;
-        double coolingRate = 0.00001;
+        double coolingRate = 0.000001; //do not put it too low , makes the result better but much slower to computee.
         int[][] input = Data.randomArray(arrayLength, nbColors);
         int[][] clone0= new int[input.length][input.length];
         for(int x=0;x<input.length;x++)

@@ -33,7 +33,7 @@ public class multiSimulatedAnnealing extends Thread {
 
     public void run() {
         try {
-            int candidateValue;
+            double candidateValue;
             while (T > 1) {
 
                 neighbours = SimulatedAnnealing.randomAdjacentPixelPair(color);
@@ -56,7 +56,11 @@ public class multiSimulatedAnnealing extends Thread {
 
 
                     } else {
-                        candidateValue = Objective.energyImage2(color);
+                        Objective.swapPx(color, candidate1x, candidate1y, candidate2x, candidate2y);
+                        candidateValue=Objective.initEnergyCrystal(color);
+                        Objective.swapPx(color, candidate1x, candidate1y, candidate2x, candidate2y);
+
+
                     }
 
                     if (candidateValue < currentValue || (Main.acceptWorse && ((Math.pow(Math.E, (currentValue - candidateValue) / T)) > Math.random()))) { //operation: as the heat goes down, less probability to switch the colors

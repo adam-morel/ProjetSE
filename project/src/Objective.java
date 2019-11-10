@@ -90,7 +90,7 @@ public class Objective {
     /**
      * Computes the energy centered around two pixels.
      *
-     * @param image the revelent image
+     * @param image the relevant image
      * @param x1    x of px1
      * @param y1    y of px1
      * @param x2    x of px2
@@ -107,7 +107,11 @@ public class Objective {
         for (int i = x0 - 1; i <= xx + 1; i++)
             for (int j = y0 - 1; j <= yy + 1; j++) {
                 if (i >= 0 && i < image.length && j >= 0 && j < image.length) {
-                    result += checkNrjSides(image, i, j);
+                    if (!Main.crystalMode) {
+                        result += checkNrjSides(image, i, j);
+                    } else{
+                        result+=checkNrjSides(image,i,j,Main.crystalRange);
+                    }
                 }
 
             }
@@ -123,8 +127,9 @@ public class Objective {
      * @param j     pixel.y
      * @return energy of that pixel, between 0 and 4
      */
-    private static int checkNrjSides(int[][] image, int i, int j) {
-        int energy = 0;
+    private static double checkNrjSides(int[][] image, int i, int j) {
+      // old version
+        /*  int energy = 0;
         if (image.length > 1) {
             if (i - 1 > 0) {
                 if (image[i][j] != image[i - 1][j]) {
@@ -170,6 +175,18 @@ public class Objective {
 
 
         }
+        return energy;*/
+     return checkNrjSides(image, i, j,1);
+    }
+
+    private static double checkNrjSides(int[][] image, int i, int j, int range) {
+        int energy = 0;
+        for (int x = Math.max(0, i - range); x < Math.min(image.length, i + range); x++)
+            for (int y = Math.max(0, j - range); y < Math.min(image.length, j + range); y++) {
+                if (image[x][y] != image[i][j])
+                    energy++;
+
+            }
         return energy;
     }
 
@@ -179,7 +196,7 @@ public class Objective {
         img[x2][y2] = tmp;
     }
 
-    static int initEnergy(int[][] color) {
+    static double initEnergy(int[][] color) {
         int currentValue = 0;
         for (int i = 0; i < color.length; i++) {
             for (int j = 0; j < color.length; j++) {
@@ -195,38 +212,21 @@ public class Objective {
      * @param image input image
      * @return energy
      */
-    static int energyImage2(int[][] image) {
+    static double initEnergyCrystal(int[][] image) {
         int energy = 0;
+        int range = Main.crystalRange;
+
+
         for (int i = 0; i < image.length; i++) {
             for (int j = 0; j < image.length; j++) {
-                /*
-
-                for (int x = 0; x < image.length; x++) {
-                    for (int y = 0; y < image.length; y++) {
-                        if ((x == i && (y == j - 1 || y == j + 1))
-                                || ((x == i - 1 || x == i + 1) && (y == i - 1 || y == i || y == i + 1))) {
-                            if (image[x][y] != image[i][j]) {
-                                energy++;
-                            }
-
-                        } else {
-                            if (image[x][y] == image[i][j]) {
-                                energy++;
-                            }
-                        }
-                    }
-                }
-
-*/
-                int range = 20;
-                for (int x = 0; x < image.length; x++)
-                    for (int y = 0; y < image.length; y++) {
-                        if (image[i][j] != image[x][y] || !(Math.abs(x-i) < range && Math.abs(y-j) <range)) {
-                            energy++;
-
-                        }
-                    }
-
+                energy += checkNrjSides(image, i, j, range);
+                int xsquare = i - range;
+                int ysquare = j - range;
+                if (i - range < 0)
+                    xsquare = 0;
+                if (i + range > image.length - 1)
+                    ysquare = image.length - 1;
+                energy += Math.pow(image.length, 2) - xsquare * ysquare;
             }
         }
 
